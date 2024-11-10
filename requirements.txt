@@ -1,6 +1,6 @@
 streamlit
 requests 
 beautifulsoup4 
-PyPDF2 groq 
+PyPDF2
 validators
 groq
