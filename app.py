@@ -1,25 +1,12 @@
 
-
-import os
 import streamlit as st
-from dotenv import load_dotenv
 import requests
 from bs4 import BeautifulSoup
 import PyPDF2
 import io
-from langdetect import detect
 from groq import Groq
 from typing import List, Dict, Optional
 import validators
-import json
-from urllib.parse import urljoin, urlparse
-import concurrent.futures
-import time
-import asyncio
-from functools import partial
-
-# Load environment variables
-load_dotenv()
 
 # Set Streamlit theme to dark mode
 st.set_page_config(
@@ -73,15 +60,13 @@ gradient_css = """
 """
 st.markdown(gradient_css, unsafe_allow_html=True)
 
-
 # Initialize Groq client
-groq_client = Groq(api_key=st.secrets("GROQ_API_KEY"))
+groq_client = Groq(api_key=st.secrets["GROQ_API_KEY"])
 
 class DocumentSearchTool:
-    # [Previous DocumentSearchTool class implementation remains the same]
     def __init__(self):
-        self.serper_api_key = st.secrets("SERPER_API_KEY")
-        self.browserless_api_key =st.secrets("BROWSERLESS_API_KEY")
+        self.serper_api_key = st.secrets["SERPER_API_KEY"]
+        self.browserless_api_key = st.secrets["BROWSERLESS_API_KEY"]
         self.visited_urls = set()
         self.pdf_docs = []
         self.search_timeout = 30
