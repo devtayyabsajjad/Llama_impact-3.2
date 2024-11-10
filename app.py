@@ -75,13 +75,13 @@ st.markdown(gradient_css, unsafe_allow_html=True)
 
 
 # Initialize Groq client
-groq_client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+groq_client = Groq(api_key=st.secrets("GROQ_API_KEY"))
 
 class DocumentSearchTool:
     # [Previous DocumentSearchTool class implementation remains the same]
     def __init__(self):
-        self.serper_api_key = os.getenv("SERPER_API_KEY")
-        self.browserless_api_key = os.getenv("BROWSERLESS_API_KEY")
+        self.serper_api_key = st.secrets("SERPER_API_KEY")
+        self.browserless_api_key =st.secrets("BROWSERLESS_API_KEY")
         self.visited_urls = set()
         self.pdf_docs = []
         self.search_timeout = 30
@@ -161,7 +161,7 @@ class SearchAssistant:
             
             chat_completion = groq_client.chat.completions.create(
                 messages=[{"role": "user", "content": prompt}],
-                model="llama3-8b-8192",
+                model="llama-3.2-90b-vision-preview",
                 temperature=0.3,
                 max_tokens=1000,
                 timeout=10
@@ -291,17 +291,17 @@ def ask_with_ease_page():
     # Language selection
     languages = {
         "English": "en",
+        "Urdu": "ur",
         "Hindi": "hi",
         "Spanish": "es",
         "French": "fr",
-        "German": "de",
-        "Urdu": "ur"
+        "German": "de"
     }
     selected_language = st.selectbox("Select Language", list(languages.keys()))
     
     # Country selection with search
     default_countries = [
-        "United States", "United Kingdom", "Canada", "Australia", "India",
+        "Pakistan" ,"United States", "United Kingdom", "Canada", "Australia", "India",
         "Germany", "France", "Spain", "Brazil", "Japan"
     ]
     country = st.text_input("Enter Country", key="country_input")
