@@ -1,4 +1,3 @@
-
 import streamlit as st
 import requests
 from bs4 import BeautifulSoup
@@ -7,6 +6,9 @@ import io
 from groq import Groq
 from typing import List, Dict, Optional
 import validators
+import time
+import asyncio
+import concurrent.futures
 
 # Set Streamlit theme to dark mode
 st.set_page_config(
@@ -31,7 +33,7 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 # Apply custom styling
-gradient_css = """
+st.markdown("""
 <style>
     .stApp {
         background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
@@ -57,16 +59,15 @@ gradient_css = """
         display: block;
     }
 </style>
-"""
-st.markdown(gradient_css, unsafe_allow_html=True)
+""", unsafe_allow_html=True)
 
 # Initialize Groq client
-groq_client = Groq(api_key=st.secrets["GROQ_API_KEY"])
+groq_client = Groq(api_key=st.secrets.GROQ_API_KEY)
 
 class DocumentSearchTool:
     def __init__(self):
-        self.serper_api_key = st.secrets["SERPER_API_KEY"]
-        self.browserless_api_key = st.secrets["BROWSERLESS_API_KEY"]
+        self.serper_api_key = st.secrets.SERPER_API_KEY
+        self.browserless_api_key = st.secrets.BROWSERLESS_API_KEY
         self.visited_urls = set()
         self.pdf_docs = []
         self.search_timeout = 30
@@ -94,7 +95,7 @@ class DocumentSearchTool:
             st.warning(f"Search error: {str(e)}")
             return []
 
-    def process_url_with_timeout(self, url: str, timeout: int = 10) -> Dict:
+    def process_url_with_timeout(self, url: str, timeout: int = 10) -> Optional[Dict]:
         try:
             if url.lower().endswith('.pdf'):
                 content = self.extract_pdf_content(url)
@@ -136,7 +137,6 @@ class DocumentSearchTool:
             return None
 
 class SearchAssistant:
-    # [Previous SearchAssistant class implementation remains the same]
     def __init__(self):
         self.search_tool = DocumentSearchTool()
 
@@ -146,7 +146,7 @@ class SearchAssistant:
             
             chat_completion = groq_client.chat.completions.create(
                 messages=[{"role": "user", "content": prompt}],
-                model="llama-3.2-90b-vision-preview",
+                model="llama2-70b-4096",
                 temperature=0.3,
                 max_tokens=1000,
                 timeout=10
@@ -224,7 +224,7 @@ class SearchAssistant:
         try:
             chat_completion = groq_client.chat.completions.create(
                 messages=[{"role": "user", "content": prompt}],
-                model="llama3-8b-8192",
+                model="llama2-70b-4096",
                 temperature=0.3,
                 max_tokens=1000
             )
@@ -264,8 +264,6 @@ def home_page():
     We'll help you find the information you need!
     """)
     
-    # Quick start section
-    st.subheader("Quick Start")
     if st.button("Start Your Search"):
         st.session_state.page = "AskWithEase"
         st.experimental_rerun()
@@ -273,7 +271,6 @@ def home_page():
 def ask_with_ease_page():
     st.title("Ask With Ease")
     
-    # Language selection
     languages = {
         "English": "en",
         "Urdu": "ur",
@@ -284,22 +281,19 @@ def ask_with_ease_page():
     }
     selected_language = st.selectbox("Select Language", list(languages.keys()))
     
-    # Country selection with search
     default_countries = [
-        "Pakistan" ,"United States", "United Kingdom", "Canada", "Australia", "India",
+        "Pakistan", "United States", "United Kingdom", "Canada", "Australia", "India",
         "Germany", "France", "Spain", "Brazil", "Japan"
     ]
     country = st.text_input("Enter Country", key="country_input")
     if not country:
         country = st.selectbox("Or select from common countries", default_countries)
     
-    # Search query input
     query = st.text_input("What information are you looking for?", key="query_input")
     
     if st.button("Search") and query and country:
         try:
             search_assistant = SearchAssistant()
-            
             results = search_assistant.process_query(query, languages[selected_language], country)
             
             st.info(f"Search completed in {results['search_time']}")
@@ -364,4 +358,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
