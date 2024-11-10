@@ -176,36 +176,8 @@ gradient_css = """
 - [ ] API Integration for Third-party Services
 - [ ] Offline Document Cache
 
-## 🤝 Contributing
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📝 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-## 📞 Contact
-
-Project Link: [https://github.com/yourusername/govease](https://github.com/yourusername/govease)
-
-<div align="center">
-
-### ⭐ Star this repo if you find it helpful!
-
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
-
-<p align="center">
-Made with ❤️ by Your Name
-</p>
-
-</div>
-
 <!-- Team Section with Hover Effects -->
-## 👥 Meet Team LegalBuddy
+## 👥 Meet Team GOVEASE
 
 <table>
   <tr>
@@ -248,6 +220,19 @@ Made with ❤️ by Your Name
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/muhammad-ibrahim-qasmi-9876a1297/)
 [![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/LegalBuddyAI)
+<div align="center">
+
+### ⭐ Star this repo if you find it helpful!
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+<p align="center">
+Made with ❤️ by Your Name
+</p>
+
+</div>
+
+
 
 <sub> Built by __B-TAJI Crew__ </sub>
 
