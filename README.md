@@ -53,7 +53,7 @@ Navigate government procedures with ease using AI-powered document search and co
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/govease.git
+git clone https://github.com/muhammadibrahim313/Llama_impact-3.2
 
 # Navigate to project directory
 cd govease
