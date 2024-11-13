@@ -32,9 +32,10 @@ st.set_page_config(
         'Get Help': 'https://www.example.com/help',
         'Report a bug': "https://www.example.com/bug",
         'About': "# GovEase - Your Government Document Assistant"
-    },
-    theme=st.theme('dark')
+    }
+
 )
+
 # Force dark theme
 st.markdown("""
     <script>
