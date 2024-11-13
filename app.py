@@ -21,6 +21,8 @@ from functools import partial
 # Load environment variables
 load_dotenv()
 
+import streamlit as st
+
 # Set Streamlit theme to dark mode
 st.set_page_config(
     page_title="GovEase",
@@ -33,7 +35,6 @@ st.set_page_config(
     },
     theme=st.theme('dark')
 )
-
 # Force dark theme
 st.markdown("""
     <script>
